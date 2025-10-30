@@ -12,7 +12,7 @@ pipeline {
             steps {
                 // Clone the repo into a workspace directory
                 git branch: 'main',
-                    url: 'https://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@github.com/leap5777/graphql-springboot-app.git'
+                    url: 'https://github.com/leap5777/graphql-springboot-app.git'
 
                 // Copy code to a local directory if needed
                 bat "xcopy /E /I /Y \"%WORKSPACE%\" C:\\jenkins_workspace\\%APP_NAME%"
