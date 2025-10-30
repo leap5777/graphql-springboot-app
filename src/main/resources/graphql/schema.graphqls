@@ -1,0 +1,30 @@
+
+type Book{
+    id: String
+    title: String
+    author: String
+    price: Float
+}
+
+input BookRequest {
+    title: String!
+    author: String!
+    price: Float!
+}
+
+input BookUpdateRequest{
+    title: String
+    author: String
+    price: Float
+}
+
+type Query {
+    getAllBooks: [Book]
+    findBookById(id: String!): Book!
+}
+
+type Mutation {
+    addBook(bookRequest: BookRequest!) : Book!
+    updateBook(id: String!,bookRequest: BookUpdateRequest) : Book!
+    deleteBook(id: String) : String
+}

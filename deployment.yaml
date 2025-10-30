@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: graphql-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: graphql-app
+  template:
+    metadata:
+      labels:
+        app: graphql-app
+    spec:
+      containers:
+        - name: graphql-app
+          image: karan77777/mygraphql:latest
+          ports:
+            - containerPort: 8080
