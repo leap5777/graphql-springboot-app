@@ -1,0 +1,45 @@
+<configuration>
+
+    <!-- Console Appender for local debugging -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Logstash TCP Appender -->
+    <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <!-- Docker-friendly environment variables with defaults -->
+        <destination>${LOGSTASH_HOST:logstash}:${LOGSTASH_PORT:5000}</destination>
+
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <!-- Always include timestamp and version -->
+                <timestamp/>
+                <version/>
+
+                <!-- Core log information -->
+                <loggerName/>
+                <threadName/>
+                <logLevel/>
+                <message/>
+
+                <!-- Optional: exception stacktrace -->
+                <stackTrace/>
+
+                <!-- MDC for custom fields -->
+                <mdc/>
+
+                <!-- Caller data for class/method/line -->
+                <callerData/>
+            </providers>
+        </encoder>
+    </appender>
+
+    <!-- Root logger -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="LOGSTASH"/>
+    </root>
+
+</configuration>
